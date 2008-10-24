@@ -1,1 +1,1 @@
-./configure --prefix=/tmp/im-6.3.1 --without-bzlib --without-x --without-jp2 --without-perl --without-lcms --disable-static
+./configure --prefix=/tmp/im --without-bzlib --without-x --without-jp2 --without-perl --without-lcms --disable-static
