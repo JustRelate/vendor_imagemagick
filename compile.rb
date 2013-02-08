@@ -5,8 +5,7 @@ require 'fileutils'
 
 include FileUtils
 
-if ARGV.length != 1 ||
-    !File.exists?(srcPkg = Pathname(ARGV[0]).realpath)
+unless ARGV.length == 1 && File.exists?(srcPkg = Pathname(ARGV[0]).realpath)
   puts "Usage: #{$0} <srcPackage>"
   exit 1
 end
@@ -22,7 +21,7 @@ end
 
 
 def sh(*args)
-  if !system(*args)
+  unless system(*args)
     raise "failed to execute '#{args.join("' '")}' in #{pwd}"
   end
 end
@@ -41,7 +40,7 @@ chdir File.dirname($0) do
           '--without-perl', '--without-lcms', '--disable-static', '--disable-openmp'
       sh 'make'
       sh 'make', 'install'
-      sh 'tar', '-c', '-j', '-f', "../../#{os_type}/#{version}.tbz2", '-C', '../im', '.'
+      sh 'tar', 'cjf', "../../#{os_type}/#{version}.tbz2", '-C', '../im', '.'
     end
   end
   rm_rf 'tmp'
